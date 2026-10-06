@@ -1,24 +1,16 @@
 name: Phase 2 - CI (lint, test, build)
 
-# Trigger on every push and pull request touching this phase's folder
 on:
   push:
     branches: ["main"]
-    paths:
-      - "phase2-intermediate/**"
   pull_request:
     branches: ["main"]
-    paths:
-      - "phase2-intermediate/**"
-
-defaults:
-  run:
-    working-directory: phase2-intermediate
 
 jobs:
   lint-and-test:
     name: Lint & Test
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -41,6 +33,7 @@ jobs:
     name: Build Docker Image
     needs: lint-and-test
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -51,6 +44,6 @@ jobs:
       - name: Build image (not pushed - see Phase 3 for registry push)
         uses: docker/build-push-action@v6
         with:
-          context: phase2-intermediate
+          context: .
           push: false
           tags: docker-mastery:phase2
