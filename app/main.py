@@ -16,7 +16,7 @@ app = FastAPI(
 def root():
     """Root endpoint - simple welcome message."""
     return {
-        "message": "Welcome to the Docker Mastery Demo API",
+        "message": "Welcome to the Docker Mastery Demo API - Phase 2",
         "phase": "2 - intermediate",
         "status": "running",
     }
